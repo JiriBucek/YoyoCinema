@@ -11,5 +11,6 @@ import Foundation
 class Movie{
     var title: String?
     var description: String?
-    var imageUrl: String?    
+    var imageUrl: String?
+    var releaseYear: String?
 }
