@@ -9,6 +9,9 @@
 import UIKit
 
 class SearchVC: UIViewController {
+    
+    let searchManager = SearchManager.shared
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()

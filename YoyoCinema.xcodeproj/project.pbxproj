@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3BB9F03C2FA9721437EA31C4 /* Pods_YoyoCinema.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 78899175C3363CDCB3D83F35 /* Pods_YoyoCinema.framework */; };
+		893A8F0F226399FE0033D0D3 /* SearchManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 893A8F0E226399FE0033D0D3 /* SearchManager.swift */; };
 		8966753C226395D1007E6B5B /* MoviePreviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8966753B226395D1007E6B5B /* MoviePreviewCell.swift */; };
 		8966753E226396CE007E6B5B /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8966753D226396CE007E6B5B /* Movie.swift */; };
 		89E161A922639211005BD5FB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89E161A822639211005BD5FB /* AppDelegate.swift */; };
@@ -17,6 +19,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		426D51331E68F01E8AED0847 /* Pods-YoyoCinema.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YoyoCinema.release.xcconfig"; path = "Pods/Target Support Files/Pods-YoyoCinema/Pods-YoyoCinema.release.xcconfig"; sourceTree = "<group>"; };
+		5F08248590BC658B5D510B0C /* Pods-YoyoCinema.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YoyoCinema.debug.xcconfig"; path = "Pods/Target Support Files/Pods-YoyoCinema/Pods-YoyoCinema.debug.xcconfig"; sourceTree = "<group>"; };
+		78899175C3363CDCB3D83F35 /* Pods_YoyoCinema.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YoyoCinema.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		893A8F0E226399FE0033D0D3 /* SearchManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchManager.swift; sourceTree = "<group>"; };
 		8966753B226395D1007E6B5B /* MoviePreviewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviePreviewCell.swift; sourceTree = "<group>"; };
 		8966753D226396CE007E6B5B /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 		89E161A522639211005BD5FB /* YoyoCinema.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YoyoCinema.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -33,17 +39,53 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3BB9F03C2FA9721437EA31C4 /* Pods_YoyoCinema.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		82C0107CC5AD33CBC5F4350E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				78899175C3363CDCB3D83F35 /* Pods_YoyoCinema.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		8977DBB022639D5B00013591 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				89E161AA22639211005BD5FB /* SearchVC.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		8977DBB122639D6D00013591 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				8966753D226396CE007E6B5B /* Movie.swift */,
+				893A8F0E226399FE0033D0D3 /* SearchManager.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		8977DBB222639D7800013591 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				8966753B226395D1007E6B5B /* MoviePreviewCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		89E1619C22639211005BD5FB = {
 			isa = PBXGroup;
 			children = (
 				89E161A722639211005BD5FB /* YoyoCinema */,
 				89E161A622639211005BD5FB /* Products */,
+				97B75176F2A3ECEB747D292F /* Pods */,
+				82C0107CC5AD33CBC5F4350E /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -59,15 +101,24 @@
 			isa = PBXGroup;
 			children = (
 				89E161A822639211005BD5FB /* AppDelegate.swift */,
-				89E161AA22639211005BD5FB /* SearchVC.swift */,
-				8966753D226396CE007E6B5B /* Movie.swift */,
-				89E161AC22639211005BD5FB /* Main.storyboard */,
-				8966753B226395D1007E6B5B /* MoviePreviewCell.swift */,
+				8977DBB022639D5B00013591 /* Controllers */,
+				8977DBB122639D6D00013591 /* Model */,
+				8977DBB222639D7800013591 /* View */,
 				89E161AF22639213005BD5FB /* Assets.xcassets */,
+				89E161AC22639211005BD5FB /* Main.storyboard */,
 				89E161B122639213005BD5FB /* LaunchScreen.storyboard */,
 				89E161B422639213005BD5FB /* Info.plist */,
 			);
 			path = YoyoCinema;
+			sourceTree = "<group>";
+		};
+		97B75176F2A3ECEB747D292F /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				5F08248590BC658B5D510B0C /* Pods-YoyoCinema.debug.xcconfig */,
+				426D51331E68F01E8AED0847 /* Pods-YoyoCinema.release.xcconfig */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -77,9 +128,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 89E161B722639213005BD5FB /* Build configuration list for PBXNativeTarget "YoyoCinema" */;
 			buildPhases = (
+				6BAE7DD275714E06527ECF0A /* [CP] Check Pods Manifest.lock */,
 				89E161A122639211005BD5FB /* Sources */,
 				89E161A222639211005BD5FB /* Frameworks */,
 				89E161A322639211005BD5FB /* Resources */,
+				F7186D865894A7E3196E3BF7 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -136,6 +189,49 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		6BAE7DD275714E06527ECF0A /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-YoyoCinema-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F7186D865894A7E3196E3BF7 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-YoyoCinema/Pods-YoyoCinema-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-YoyoCinema/Pods-YoyoCinema-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		89E161A122639211005BD5FB /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -143,6 +239,7 @@
 			files = (
 				8966753C226395D1007E6B5B /* MoviePreviewCell.swift in Sources */,
 				89E161AB22639211005BD5FB /* SearchVC.swift in Sources */,
+				893A8F0F226399FE0033D0D3 /* SearchManager.swift in Sources */,
 				8966753E226396CE007E6B5B /* Movie.swift in Sources */,
 				89E161A922639211005BD5FB /* AppDelegate.swift in Sources */,
 			);
@@ -288,6 +385,7 @@
 		};
 		89E161B822639213005BD5FB /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5F08248590BC658B5D510B0C /* Pods-YoyoCinema.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -306,6 +404,7 @@
 		};
 		89E161B922639213005BD5FB /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 426D51331E68F01E8AED0847 /* Pods-YoyoCinema.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
