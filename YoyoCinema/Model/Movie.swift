@@ -13,4 +13,5 @@ class Movie{
     var description: String?
     var imageUrl: String?
     var releaseYear: String?
+    var id: Int?
 }

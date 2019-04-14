@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Alamofire
 
 class MoviePreviewCell: UITableViewCell {
 
@@ -16,14 +17,18 @@ class MoviePreviewCell: UITableViewCell {
     
     @IBOutlet weak var descriptionLabel: UILabel!
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
+    
+    func getPosterImage(with url: String){
+        if let url = URL(string: url){
+            Alamofire.request(url).response { response in
+                if let data = response.data {
+                    if let image = UIImage(data: data){
+                        self.movieImage.image = image
+                    }
+                } else {
+                    print("Could not load the poster image.")
+                }
+            }
+        }
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-
 }
