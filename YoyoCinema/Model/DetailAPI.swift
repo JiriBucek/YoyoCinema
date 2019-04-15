@@ -14,7 +14,7 @@ import SwiftyJSON
 class DetailAPI{
     
     static let shared = DetailAPI()
-    var movieDetail = MovieDetail()
+    var movieDetail: MovieDetail?
     
     func requestMovieDetails(for movieId: Int, completionHandler: @escaping (_ success: Bool) -> Void){
         let posterImageBasePath = "https://image.tmdb.org/t/p/w200"
@@ -23,7 +23,6 @@ class DetailAPI{
             completionHandler(false)
             return
         }
-        
         
         Alamofire.request(url)
             .validate(statusCode: 200..<300)
@@ -35,31 +34,31 @@ class DetailAPI{
                     let json = JSON(response.result.value as Any)
                     
                     if let title = json["title"].string{
-                        self.movieDetail.title = title
+                        self.movieDetail?.title = title
                     }
                     
                     if let description = json["overview"].string{
-                        self.movieDetail.description = description
+                        self.movieDetail?.description = description
                     }
                     
                     if let original = json["original_title"].string{
-                        self.movieDetail.originalTitle = original
+                        self.movieDetail?.originalTitle = original
                     }
                     
                     if let imageUrl = json["poster_path"].string{
-                        self.movieDetail.imageUrl = posterImageBasePath + imageUrl
+                        self.movieDetail?.imageUrl = posterImageBasePath + imageUrl
                     }
                     
                     if let year = json["release_date"].string{
-                        self.movieDetail.releaseYear = String(year.prefix(4))
+                        self.movieDetail?.releaseYear = String(year.prefix(4))
                     }
                     
                     if let lenght = json["runtime"].int{
-                        self.movieDetail.length = lenght
+                        self.movieDetail?.length = lenght
                     }
                     
                     if let rank = json["vote_average"].double{
-                        self.movieDetail.rank = rank
+                        self.movieDetail?.rank = rank
                     }
                     
                     if let genres = json["genres"].array, genres.count > 0{
@@ -69,7 +68,7 @@ class DetailAPI{
                                 genresArray.append(name)
                             }
                         }
-                        self.movieDetail.genres = genresArray
+                        self.movieDetail?.genres = genresArray
                     }
                     completionHandler(true)
                 
@@ -79,7 +78,4 @@ class DetailAPI{
                 }
         }
     }
-    
-    
-    
 }

@@ -80,7 +80,7 @@ class SearchAPI: NSObject{
     
     // Private
     
-    private func removeSpecialCharacters( from oldString: String) -> String{
+    private func removeSpecialCharacters(from oldString: String) -> String{
         var newString = oldString.replacingOccurrences(of: " ", with: "+")
         newString = newString.folding(options: .diacriticInsensitive, locale: .current)
         return newString

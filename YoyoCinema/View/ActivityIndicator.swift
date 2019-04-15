@@ -11,28 +11,28 @@ import UIKit
 class ActivityIndicator {
     static let shared = ActivityIndicator()
 
-    var progressView = UIView()
+    var frameView = UIView()
     var activityIndicator = UIActivityIndicatorView()
     
     func startAnimating(view: UIView) {
-        progressView.frame = CGRect(x: 0, y: 0, width: 80, height: 80)
-        progressView.center = CGPoint(x: view.bounds.width / 2, y: view.bounds.height / 3)
-        progressView.backgroundColor = .darkGray
-        progressView.alpha = 0.6
-        progressView.clipsToBounds = true
-        progressView.layer.cornerRadius = 10
+        frameView.frame = CGRect(x: 0, y: 0, width: 80, height: 80)
+        frameView.center = CGPoint(x: view.bounds.width / 2, y: view.bounds.height / 3)
+        frameView.backgroundColor = .darkGray
+        frameView.alpha = 0.6
+        frameView.clipsToBounds = true
+        frameView.layer.cornerRadius = 10
         
         activityIndicator.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
         activityIndicator.style = .whiteLarge
-        activityIndicator.center = CGPoint(x: progressView.bounds.width / 2, y: progressView.bounds.height / 2)
+        activityIndicator.center = CGPoint(x: frameView.bounds.width / 2, y: frameView.bounds.height / 2)
         
-        progressView.addSubview(activityIndicator)
-        view.addSubview(progressView)
+        frameView.addSubview(activityIndicator)
+        view.addSubview(frameView)
         activityIndicator.startAnimating()
     }
     
     func stopAnimating() {
         activityIndicator.stopAnimating()
-        progressView.removeFromSuperview()
+        frameView.removeFromSuperview()
     }
 }

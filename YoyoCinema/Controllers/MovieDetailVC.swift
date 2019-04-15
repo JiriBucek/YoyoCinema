@@ -30,13 +30,18 @@ class MovieDetailVC: UITableViewController {
     @IBOutlet weak var addToFavouritesButton: UIButton!
     
     @IBAction func addToFavouritesButtonPressed(_ sender: Any) {
+        favouritesDataSource.saveFavourite()
+        toggleFavouritesButton()
     }
     
     var id: Int?
     let detailAPI = DetailAPI.shared
+    let favouritesDataSource = FavouritesDataSource.shared
     
-
+    
     override func viewDidLoad() {
+        self.tableView.tableFooterView = UIView()
+        ActivityIndicator.shared.startAnimating(view: self.view)
         loadDetails()
         super.viewDidLoad()
     }
@@ -45,48 +50,60 @@ class MovieDetailVC: UITableViewController {
         if let id = id{
             detailAPI.requestMovieDetails(for: id) { success in
                 if success{
-                    let movieDetail = self.detailAPI.movieDetail
-                    
-                    var movieTitle = ""
-                    if let title = movieDetail.title{
-                        movieTitle = title
-                        if let year = movieDetail.releaseYear{
-                            movieTitle += " (\(year))"
+                    if let movieDetail = self.detailAPI.movieDetail{
+                        var movieTitle = ""
+                        if let title = movieDetail.title{
+                            movieTitle = title
+                            if let year = movieDetail.releaseYear{
+                                movieTitle += " (\(year))"
+                            }
                         }
+                        self.movieTitleLabel.text = movieTitle
+                        
+                        self.movieDescriptionLabel.text = movieDetail.description
+                        
+                        if let rank = movieDetail.rank{
+                            self.movieRankLabel.text = "\(rank) / 10"
+                        }
+                        
+                        if let imageUrl = movieDetail.imageUrl{
+                            self.moviePosterImage.getPosterImage(with: imageUrl)
+                        }
+                        
+                        if let length = movieDetail.length{
+                            self.lengthLabel.text = "\(length) min"
+                        }
+                        
+                        if let originalTitle = movieDetail.originalTitle{
+                            self.originalTitleLabel.text = originalTitle
+                        }
+                        
+                        if let genres = movieDetail.genres{
+                            var genresString = ""
+                            for genre in genres { genresString += "\(genre) "}
+                            self.genreLabel.text = genresString
+                        }
+                        self.toggleFavouritesButton()
+                        self.tableView.reloadData()
+                        ActivityIndicator.shared.stopAnimating()
                     }
-                    self.movieTitleLabel.text = movieTitle
-                    
-                    self.movieDescriptionLabel.text = movieDetail.description
-                    
-                    if let rank = movieDetail.rank{
-                        self.movieRankLabel.text = "\(rank) / 10"
-                    }
-                    
-                    if let imageUrl = movieDetail.imageUrl{
-                        self.moviePosterImage.getPosterImage(with: imageUrl)
-                    }
-                    
-                    if let length = movieDetail.length{
-                        self.lengthLabel.text = "\(length) min"
-                    }
-                    
-                    if let originalTitle = movieDetail.originalTitle{
-                        self.originalTitleLabel.text = originalTitle
-                    }
-                    
-                    if let genres = movieDetail.genres{
-                        var genresString = ""
-                        for genre in genres { genresString += "\(genre) "}
-                        self.genreLabel.text = genresString
-                    }
-                    self.tableView.reloadData()
                 }
             }
         }
-        
-        
-        
     }
+    
+    func toggleFavouritesButton(){
+        if let currentMovie = favouritesDataSource.getCurrentFavourite(){
+            if favouritesDataSource.isAlreadyFavourite(favourite: currentMovie){
+                addToFavouritesButton.setTitle("Remove from favourites", for: .normal)
+                addToFavouritesButton.setTitleColor(.red, for: .normal)
+            }else{
+                addToFavouritesButton.setTitle("Add to favourites", for: .normal)
+                addToFavouritesButton.setTitleColor(.blue, for: .normal)
+            }
+        }
+    }
+    
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
             return UITableView.automaticDimension

@@ -22,9 +22,12 @@ class SearchVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        searchTableView.tableFooterView = UIView()
         searchTableView.delegate = self
         searchTableView.dataSource = self
         searchBar.delegate = self
+        
+        print(FavouritesDataSource.shared.loadFavourites())
     }
 }
 
