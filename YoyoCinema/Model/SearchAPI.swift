@@ -10,12 +10,11 @@ import Foundation
 import Alamofire
 import SwiftyJSON
 
-class SearchManager: NSObject{
-    
+class SearchAPI: NSObject{
+
+    static let shared = SearchAPI()
     private var movies = [Movie]()
-    static let shared = SearchManager()
-    
-    
+
     // Public
     
     func requestSearchResults(with searchString: String, completionHandler: @escaping (_ success: Bool) -> Void ){
@@ -46,11 +45,11 @@ class SearchManager: NSObject{
                         self.movies.removeAll()
                         for result in results{
                             let movie = Movie()
-                            if let title = result["original_title"].string, let description = result["overview"].string, let posterPath = result["poster_path"].string, let year = result["release_date"].string, let id = result["id"].int{
+                            if let title = result["title"].string, let description = result["overview"].string, let posterPath = result["poster_path"].string, let year = result["release_date"].string, let id = result["id"].int{
                                 
                                 movie.title = title
                                 movie.description = description
-                                movie.releaseYear = year
+                                movie.releaseYear = String(year.prefix(4))
                                 movie.imageUrl = posterBasePath + posterPath
                                 movie.id = id
                                 self.movies.append(movie)

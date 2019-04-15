@@ -17,7 +17,7 @@ class SearchVC: UIViewController {
     
     @IBOutlet weak var backgroundView: UIView!
     
-    var searchManager = SearchManager.shared
+    var searchAPI = SearchAPI.shared
     
 
     override func viewDidLoad() {
@@ -30,6 +30,19 @@ class SearchVC: UIViewController {
 
 
 extension SearchVC: UITableViewDelegate{
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "movieDetailSegue" {
+            let movieDetailVC = segue.destination as! MovieDetailVC
+            guard let indexPath = searchTableView.indexPathForSelectedRow, let movieId = searchAPI.movieForIndexPath(indexPath: indexPath)?.id else {
+                return
+            }
+            movieDetailVC.id = movieId
+        }
+    }
     
     
 }
@@ -39,24 +52,41 @@ extension SearchVC: UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MoviePreviewCell", for: indexPath) as! MoviePreviewCell
         
-        if let movie = searchManager.movieForIndexPath(indexPath: indexPath){
-            cell.titleLabel.text = movie.title
+        if let movie = searchAPI.movieForIndexPath(indexPath: indexPath){
+            var titleText = ""
+            if let title = movie.title{
+                titleText = title
+                if let year = movie.releaseYear{
+                    titleText += " (\(year))"
+                }
+            }
+            cell.titleLabel.text = titleText
+            
             cell.descriptionLabel.text = movie.description
-            cell.getPosterImage(with: movie.imageUrl!)
+            
+            if let imageUrl = movie.imageUrl{
+                cell.movieImage.getPosterImage(with: imageUrl)
+            }
+            
         }
         return cell
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return searchManager.numberOfRows()
+        return searchAPI.numberOfRows()
     }
 }
 
 
 extension SearchVC: UISearchBarDelegate, UITextFieldDelegate{
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-            searchManager.requestSearchResults(with: searchText){ success in
+        searchTableView.isHidden = true
+        ActivityIndicator.shared.startAnimating(view: backgroundView)
+        
+            searchAPI.requestSearchResults(with: searchText){ success in
                 self.searchTableView.reloadData()
+                ActivityIndicator.shared.stopAnimating()
+                self.searchTableView.isHidden = false
                 
                 if self.searchTableView.numberOfRows(inSection: 0) > 0 {
                     let indexPath = IndexPath(row: 0, section: 0)

@@ -17,16 +17,19 @@ class MoviePreviewCell: UITableViewCell {
     
     @IBOutlet weak var descriptionLabel: UILabel!
     
-    
+}
+
+
+extension UIImageView{
     func getPosterImage(with url: String){
         if let url = URL(string: url){
             Alamofire.request(url).response { response in
                 if let data = response.data {
                     if let image = UIImage(data: data){
-                        self.movieImage.image = image
+                        self.image = image
                     }
                 } else {
-                    print("Could not load the poster image.", response.response as Any)
+                    print("Could not load the poster image: ", response.response as Any)
                 }
             }
         }
