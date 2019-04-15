@@ -26,8 +26,6 @@ class SearchVC: UIViewController {
         searchTableView.dataSource = self
         searchBar.delegate = self
     }
-
-
 }
 
 
@@ -37,6 +35,7 @@ extension SearchVC: UITableViewDelegate{
 }
 
 extension SearchVC: UITableViewDataSource{
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MoviePreviewCell", for: indexPath) as! MoviePreviewCell
         
@@ -58,7 +57,12 @@ extension SearchVC: UISearchBarDelegate, UITextFieldDelegate{
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
             searchManager.requestSearchResults(with: searchText){ success in
                 self.searchTableView.reloadData()
-        }
+                
+                if self.searchTableView.numberOfRows(inSection: 0) > 0 {
+                    let indexPath = IndexPath(row: 0, section: 0)
+                    self.searchTableView.scrollToRow(at: indexPath, at: .top, animated: false)
+                }
+            }
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

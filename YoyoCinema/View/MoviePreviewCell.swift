@@ -26,7 +26,7 @@ class MoviePreviewCell: UITableViewCell {
                         self.movieImage.image = image
                     }
                 } else {
-                    print("Could not load the poster image.")
+                    print("Could not load the poster image.", response.response as Any)
                 }
             }
         }

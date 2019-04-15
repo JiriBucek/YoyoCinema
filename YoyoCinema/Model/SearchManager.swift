@@ -9,7 +9,6 @@
 import Foundation
 import Alamofire
 import SwiftyJSON
-import Kingfisher
 
 class SearchManager: NSObject{
     
