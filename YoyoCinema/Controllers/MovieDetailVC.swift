@@ -91,6 +91,8 @@ class MovieDetailVC: UITableViewController {
                         self.tableView.reloadData()
                         ActivityIndicator.shared.stopAnimating()
                     }
+                }else{
+                    self.displayAlert(userMessage: "Could not load data. Please try again later.")
                 }
             }
         }

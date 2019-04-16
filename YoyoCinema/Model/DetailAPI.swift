@@ -14,7 +14,7 @@ import SwiftyJSON
 class DetailAPI{
     
     static let shared = DetailAPI()
-    var movieDetail: MovieDetail?
+    var movieDetail: Movie?
     
     func requestMovieDetails(for movieId: Int, completionHandler: @escaping (_ success: Bool) -> Void){
         let posterImageBasePath = "https://image.tmdb.org/t/p/w200"
@@ -30,7 +30,7 @@ class DetailAPI{
             .responseJSON { response in
                 switch response.result {
                 case .success:
-                    self.movieDetail = MovieDetail()
+                    self.movieDetail = Movie()
                     let json = JSON(response.result.value as Any)
                     
                     if let title = json["title"].string{

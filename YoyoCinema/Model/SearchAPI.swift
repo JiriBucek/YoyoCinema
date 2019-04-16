@@ -40,7 +40,7 @@ class SearchAPI: NSObject{
                 switch response.result {
                 case .success:
                     let json = JSON(response.result.value as Any)
-                    
+                    print(json)
                     if let results = json["results"].array{
                         self.movies.removeAll()
                         for result in results{
@@ -54,8 +54,8 @@ class SearchAPI: NSObject{
                                 movie.id = id
                                 self.movies.append(movie)
                             }
-                            completionHandler(true)
                         }
+                        completionHandler(true)
                     }
                     
                 case .failure(let error):

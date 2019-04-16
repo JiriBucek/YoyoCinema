@@ -8,7 +8,7 @@
 
 import Foundation
 
-class MovieDetail{
+class Movie{
     var title: String?
     var originalTitle: String?
     var description: String?
