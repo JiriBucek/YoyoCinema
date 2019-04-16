@@ -14,6 +14,7 @@ class FavouritesVC: UITableViewController {
 
     
     override func viewDidLoad() {
+        tableView.tableFooterView = UIView()
         super.viewDidLoad()
     }
 

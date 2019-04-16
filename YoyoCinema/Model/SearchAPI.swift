@@ -32,7 +32,6 @@ class SearchAPI: NSObject{
             return
         }
         
-        
         Alamofire.request(url)
             .validate(statusCode: 200..<300)
             .validate(contentType: ["application/json"])
@@ -40,23 +39,24 @@ class SearchAPI: NSObject{
                 switch response.result {
                 case .success:
                     let json = JSON(response.result.value as Any)
-                    print(json)
+                    
                     if let results = json["results"].array{
                         self.movies.removeAll()
-                        for result in results{
+                        for result in results {
                             let movie = Movie()
-                            if let title = result["title"].string, let description = result["overview"].string, let posterPath = result["poster_path"].string, let year = result["release_date"].string, let id = result["id"].int{
-                                
-                                movie.title = title
-                                movie.description = description
+                            movie.title = result["title"].string
+                            movie.description = result["overview"].string
+                            if let year = result["release_date"].string, year.count > 4{
                                 movie.releaseYear = String(year.prefix(4))
-                                movie.imageUrl = posterBasePath + posterPath
-                                movie.id = id
-                                self.movies.append(movie)
                             }
-                        }
+                            if let url = result["poster_path"].string{
+                                movie.imageUrl = posterBasePath + url
+                            }
+                            movie.id = result["id"].int
+                            self.movies.append(movie)
+                            }
                         completionHandler(true)
-                    }
+                        }
                     
                 case .failure(let error):
                     print(error)
