@@ -1,2 +1,2 @@
 # YoyoCinema
-A simple movie searching application. 
+A simple searching application for all the movie lovers. 
