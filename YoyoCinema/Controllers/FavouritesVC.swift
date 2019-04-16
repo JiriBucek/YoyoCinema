@@ -36,11 +36,7 @@ class FavouritesVC: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if let favouritesNumber = favouritesDataSource.numberOfFavourites(){
-            return favouritesNumber
-        }else{
-            return 0
-        }
+            return favouritesDataSource.numberOfFavourites()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

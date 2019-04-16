@@ -55,44 +55,44 @@ class MovieDetailVC: UITableViewController {
         if let id = id{
             detailAPI.requestMovieDetails(for: id) { success in
                 if success{
-                    if let movieDetail = self.detailAPI.movieDetail{
-                        var movieTitle = ""
-                        if let title = movieDetail.title{
-                            movieTitle = title
-                            if let year = movieDetail.releaseYear{
-                                movieTitle += " (\(year))"
-                            }
+                    let movieDetail = self.detailAPI.movieDetail
+                    var movieTitle = ""
+                    if let title = movieDetail.title{
+                        movieTitle = title
+                        if let year = movieDetail.releaseYear{
+                            movieTitle += " (\(year))"
                         }
-                        self.movieTitleLabel.text = movieTitle
-                        
-                        self.movieDescriptionLabel.text = movieDetail.description
-                        
-                        if let rank = movieDetail.rank{
-                            self.movieRankLabel.text = "\(rank) / 10"
-                            self.movieRankLabel.textColor = self.setRankColor(for: rank)
-                        }
-                        
-                        if let imageUrl = movieDetail.imageUrl{
-                            self.moviePosterImage.getPosterImage(with: imageUrl)
-                        }
-                        
-                        if let length = movieDetail.length{
-                            self.lengthLabel.text = "\(length) min"
-                        }
-                        
-                        if let originalTitle = movieDetail.originalTitle{
-                            self.originalTitleLabel.text = originalTitle
-                        }
-                        
-                        if let genres = movieDetail.genres{
-                            var genresString = ""
-                            for genre in genres { genresString += "\(genre) "}
-                            self.genreLabel.text = genresString
-                        }
-                        self.toggleFavouritesButton()
-                        self.tableView.reloadData()
-                        ActivityIndicator.shared.stopAnimating()
                     }
+                    self.movieTitleLabel.text = movieTitle
+                    
+                    self.movieDescriptionLabel.text = movieDetail.description
+                    
+                    if let rank = movieDetail.rank{
+                        self.movieRankLabel.text = "\(rank) / 10"
+                        self.movieRankLabel.textColor = self.setRankColor(for: rank)
+                    }
+                    
+                    if let imageUrl = movieDetail.imageUrl{
+                        self.moviePosterImage.getPosterImage(with: imageUrl)
+                    }
+                    
+                    if let length = movieDetail.length{
+                        self.lengthLabel.text = "\(length) min"
+                    }
+                    
+                    if let originalTitle = movieDetail.originalTitle{
+                        self.originalTitleLabel.text = originalTitle
+                    }
+                    
+                    if let genres = movieDetail.genres{
+                        var genresString = ""
+                        for genre in genres { genresString += "\(genre) "}
+                        self.genreLabel.text = genresString
+                    }
+                    self.toggleFavouritesButton()
+                    self.tableView.reloadData()
+                    ActivityIndicator.shared.stopAnimating()
+                    
                 }else{
                     self.displayAlert(userMessage: "Could not load data. Please try again later.")
                 }

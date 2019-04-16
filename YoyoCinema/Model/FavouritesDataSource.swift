@@ -11,29 +11,32 @@ import Foundation
 
 class FavouritesDataSource{
     static let shared = FavouritesDataSource()
-    
     let detailAPI = DetailAPI.shared
     
     // Public
     
     func savetoFavourites(){
-        if let newFavourite = getCurrentMovie(){
-            guard isAlreadyFavourite() == false else {
-                print("Already added")
-                return }
+            let newFavourite = getCurrentMovie()
+            guard !isAlreadyFavourite() else { return }
             
             var favouritesArray = [Favourite]()
             if let favouritesFromDefaults = loadFavourites(){
                 favouritesArray = favouritesFromDefaults
             }
             favouritesArray.append(newFavourite)
-            let data = try! JSONEncoder().encode(favouritesArray)
-            UserDefaults.standard.set(data, forKey: "Favourites")
-        }
+        
+            do{
+                let data = try JSONEncoder().encode(favouritesArray)
+                UserDefaults.standard.set(data, forKey: "Favourites")
+            }catch{
+                print("Error encoding favourites: \(error).")
+                return
+            }
     }
     
     func isAlreadyFavourite() -> Bool{
-        if let currentFavourite = getCurrentMovie(), let favouritesFromDefaults = loadFavourites() {
+        let currentFavourite = getCurrentMovie()
+        if let favouritesFromDefaults = loadFavourites() {
             return favouritesFromDefaults.contains(currentFavourite)
         }else{
             return false
@@ -41,10 +44,17 @@ class FavouritesDataSource{
     }
     
     func deleteFromFavourites(){
-        if let currentMovie = getCurrentMovie(), var favouritesArray = loadFavourites(), isAlreadyFavourite(), let index = favouritesArray.firstIndex(of: currentMovie){
+        let currentMovie = getCurrentMovie()
+        if var favouritesArray = loadFavourites(), isAlreadyFavourite(), let index = favouritesArray.firstIndex(of: currentMovie){
             favouritesArray.remove(at: index)
-            let data = try! JSONEncoder().encode(favouritesArray)
-            UserDefaults.standard.set(data, forKey: "Favourites")
+            
+            do{
+                let data = try JSONEncoder().encode(favouritesArray)
+                UserDefaults.standard.set(data, forKey: "Favourites")
+            }catch{
+                print("Error encoding favourites: \(error).")
+                return
+            }
         }else{
             return
         }
@@ -58,11 +68,11 @@ class FavouritesDataSource{
         }
     }
     
-    func numberOfFavourites() -> Int?{
+    func numberOfFavourites() -> Int{
         if let favouritesArray = loadFavourites(){
             return favouritesArray.count
         }else{
-            return nil
+            return 0
         }
     }
     
@@ -75,21 +85,19 @@ class FavouritesDataSource{
                 let favouritesFromDefaults = try JSONDecoder().decode([Favourite].self, from: data)
                  return favouritesFromDefaults
             }catch{
+                print("Error decoding fvourites.", error)
                 return nil
             }
         }
         return nil
     }
     
-    private func getCurrentMovie() -> Favourite?{
-        var currentFavourite = Favourite()
-        if let movieDetail = detailAPI.movieDetail{
-            currentFavourite.id = movieDetail.id
-            currentFavourite.title = movieDetail.title
-            currentFavourite.imageUrl = movieDetail.imageUrl
-            return currentFavourite
-        }else{
-            return nil
-        }
+    private func getCurrentMovie() -> Favourite{
+        var favourite = Favourite()
+        let movieDetail = detailAPI.movieDetail
+        favourite.id = movieDetail.id
+        favourite.title = movieDetail.title
+        favourite.imageUrl = movieDetail.imageUrl
+        return favourite
     }
 }
