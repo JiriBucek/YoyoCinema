@@ -18,18 +18,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nCi-3i-9nA">
+                            <navigationBar contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cnL-ms-Jl6">
                                 <rect key="frame" x="0.0" y="44" width="414" height="44"/>
-                                <color key="backgroundColor" red="0.1960558593" green="0.1960946918" blue="0.1960475743" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="tintColor" red="0.1960558593" green="0.1960946918" blue="0.1960475743" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="barTintColor" red="0.1960558593" green="0.1960946918" blue="0.1960475743" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <textAttributes key="titleTextAttributes">
                                     <color key="textColor" red="0.93725490570000003" green="0.93725490570000003" blue="0.95686274770000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </textAttributes>
                                 <items>
-                                    <navigationItem title="Yoyo Cinema" id="9BR-BO-II2"/>
+                                    <navigationItem title="Yoyo Cinema" id="hUR-GL-pUM"/>
                                 </items>
                             </navigationBar>
-                            <searchBar contentMode="redraw" barStyle="black" translatesAutoresizingMaskIntoConstraints="NO" id="mL6-yu-Dxb">
+                            <searchBar contentMode="redraw" barStyle="black" translatesAutoresizingMaskIntoConstraints="NO" id="Coz-h7-Udj">
                                 <rect key="frame" x="0.0" y="88" width="414" height="56"/>
                                 <color key="barTintColor" red="0.1960558593" green="0.1960946918" blue="0.1960475743" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -37,12 +37,12 @@
                         </subviews>
                         <color key="backgroundColor" red="0.1960558593" green="0.1960946918" blue="0.1960475743" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="mL6-yu-Dxb" firstAttribute="top" secondItem="nCi-3i-9nA" secondAttribute="bottom" id="7pC-Io-Anh"/>
-                            <constraint firstItem="nCi-3i-9nA" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="HSw-y6-LpS"/>
-                            <constraint firstItem="mL6-yu-Dxb" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="J0G-px-bMq"/>
-                            <constraint firstItem="nCi-3i-9nA" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="McB-j9-ZWC"/>
-                            <constraint firstItem="mL6-yu-Dxb" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="iWE-Qm-ASu"/>
-                            <constraint firstItem="nCi-3i-9nA" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="uA8-qB-BPI"/>
+                            <constraint firstItem="cnL-ms-Jl6" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="2Br-CP-RJT"/>
+                            <constraint firstItem="cnL-ms-Jl6" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="98U-Dl-ruT"/>
+                            <constraint firstItem="Coz-h7-Udj" firstAttribute="top" secondItem="cnL-ms-Jl6" secondAttribute="bottom" id="caF-rw-SJ0"/>
+                            <constraint firstItem="Coz-h7-Udj" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="eD5-KT-8xW"/>
+                            <constraint firstItem="cnL-ms-Jl6" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="l2A-pM-fgN"/>
+                            <constraint firstItem="Coz-h7-Udj" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="pwa-Rb-l3s"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
