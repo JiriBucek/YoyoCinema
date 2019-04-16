@@ -26,11 +26,11 @@ class SearchVC: UIViewController {
         searchTableView.delegate = self
         searchTableView.dataSource = self
         searchTableView.keyboardDismissMode = UIScrollView.KeyboardDismissMode.onDrag
-        searchBar.delegate = self
-        searchBar.becomeFirstResponder()
-        
         let nib = UINib.init(nibName: "NoResultsCell", bundle: nil)
         searchTableView.register(nib, forCellReuseIdentifier: "NoResultsCell")
+        
+        searchBar.delegate = self
+        searchBar.becomeFirstResponder()
     }
 }
 

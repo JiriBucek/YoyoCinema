@@ -48,6 +48,16 @@ extension UIViewController{
             return false
         }
     }
+}
+
+extension UIColor{
+    struct myColors{
+        static let blue = UIColor(red: 82/255, green: 162/255, blue: 239/255, alpha: 1)
+        static let red = UIColor(red: 239/255, green: 110/255, blue: 97/255, alpha: 1)
+        static let green = UIColor(red: 107/255, green: 215/255, blue: 91/255, alpha: 1)
+        static let yellow = UIColor(red: 215/255, green: 198/255, blue: 47/255, alpha: 1)
+        static let darkGray = UIColor(red: 25/255, green: 25/255, blue: 25/255, alpha: 1)
+    }
     
     
 }

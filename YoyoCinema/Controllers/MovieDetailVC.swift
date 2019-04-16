@@ -44,11 +44,12 @@ class MovieDetailVC: UITableViewController {
     
     
     override func viewDidLoad() {
-        self.tableView.tableFooterView = UIView()
+        super.viewDidLoad()
+        tableView.tableFooterView = UIView()
         ActivityIndicator.shared.startAnimating(view: self.view)
         loadDetails()
-        super.viewDidLoad()
     }
+    
 
     func loadDetails(){
         if let id = id{
@@ -68,6 +69,7 @@ class MovieDetailVC: UITableViewController {
                         
                         if let rank = movieDetail.rank{
                             self.movieRankLabel.text = "\(rank) / 10"
+                            self.movieRankLabel.textColor = self.setRankColor(for: rank)
                         }
                         
                         if let imageUrl = movieDetail.imageUrl{
@@ -101,11 +103,24 @@ class MovieDetailVC: UITableViewController {
     func toggleFavouritesButton(){
         if favouritesDataSource.isAlreadyFavourite(){
                 addToFavouritesButton.setTitle("Remove from favourites", for: .normal)
-                addToFavouritesButton.setTitleColor(.red, for: .normal)
+                addToFavouritesButton.setTitleColor(UIColor.myColors.red, for: .normal)
             }else{
                 addToFavouritesButton.setTitle("Add to favourites", for: .normal)
-                addToFavouritesButton.setTitleColor(.blue, for: .normal)
+            addToFavouritesButton.setTitleColor(UIColor.myColors.blue, for: .normal)
             }
+    }
+    
+    func setRankColor(for rank: Double) -> UIColor{
+        switch rank{
+        case 0...3:
+            return UIColor.myColors.red
+        case 3...6:
+            return UIColor.myColors.yellow
+        default:
+            return UIColor.myColors.green
+        }
+        
+        
     }
     
     
