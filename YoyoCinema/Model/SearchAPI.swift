@@ -42,17 +42,30 @@ class SearchAPI: NSObject{
                     
                     if let results = json["results"].array{
                         self.movies.removeAll()
+                        
                         for result in results {
                             let movie = Movie()
-                            movie.title = result["title"].string
-                            movie.description = result["overview"].string
+                            
+                            if let title = result["title"].string{
+                                movie.title = title
+                            }
+                            
+                            if let description = result["overview"].string{
+                                 movie.description = description
+                            }
+                            
                             if let year = result["release_date"].string, year.count > 4{
                                 movie.releaseYear = String(year.prefix(4))
                             }
+                            
                             if let url = result["poster_path"].string{
                                 movie.imageUrl = posterBasePath + url
                             }
-                            movie.id = result["id"].int
+                            
+                            if let id = result["id"].int{
+                                movie.id = id
+                            }
+                            
                             self.movies.append(movie)
                             }
                         completionHandler(true)
