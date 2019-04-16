@@ -14,9 +14,11 @@ class FavouritesDataSource{
     
     let detailAPI = DetailAPI.shared
     
-    func saveFavourite(){
-        if let newFavourite = getCurrentFavourite(){
-            guard isAlreadyFavourite(favourite: newFavourite) == false else {
+    // Public
+    
+    func savetoFavourites(){
+        if let newFavourite = getCurrentMovie(){
+            guard isAlreadyFavourite() == false else {
                 print("Already added")
                 return }
             
@@ -30,7 +32,44 @@ class FavouritesDataSource{
         }
     }
     
-    func loadFavourites() -> [Favourite]?{
+    func isAlreadyFavourite() -> Bool{
+        if let currentFavourite = getCurrentMovie(), let favouritesFromDefaults = loadFavourites() {
+            return favouritesFromDefaults.contains(currentFavourite)
+        }else{
+            return false
+        }
+    }
+    
+    func deleteFromFavourites(){
+        if let currentMovie = getCurrentMovie(), var favouritesArray = loadFavourites(), isAlreadyFavourite(), let index = favouritesArray.firstIndex(of: currentMovie){
+            favouritesArray.remove(at: index)
+            let data = try! JSONEncoder().encode(favouritesArray)
+            UserDefaults.standard.set(data, forKey: "Favourites")
+        }else{
+            return
+        }
+    }
+    
+    func favouriteForIndexPath(_ indexPath: IndexPath) -> Favourite?{
+        if let favouritesArray = loadFavourites(){
+            return favouritesArray[indexPath.row]
+        }else{
+            return nil
+        }
+    }
+    
+    func numberOfFavourites() -> Int?{
+        if let favouritesArray = loadFavourites(){
+            return favouritesArray.count
+        }else{
+            return nil
+        }
+    }
+    
+    
+    // Private
+    
+    private func loadFavourites() -> [Favourite]?{
          if let data = UserDefaults.standard.data(forKey: "Favourites"){
             do{
                 let favouritesFromDefaults = try JSONDecoder().decode([Favourite].self, from: data)
@@ -42,16 +81,7 @@ class FavouritesDataSource{
         return nil
     }
     
-    func isAlreadyFavourite(favourite: Favourite) -> Bool{
-        if let currentFavourite = getCurrentFavourite(), let favouritesFromDefaults = loadFavourites() {
-            return favouritesFromDefaults.contains(currentFavourite)
-        }else{
-            return false
-        }
-    }
-    
-    
-    func getCurrentFavourite() -> Favourite?{
+    private func getCurrentMovie() -> Favourite?{
         var currentFavourite = Favourite()
         if let movieDetail = detailAPI.movieDetail{
             currentFavourite.id = movieDetail.id
@@ -62,5 +92,4 @@ class FavouritesDataSource{
             return nil
         }
     }
-    
 }

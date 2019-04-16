@@ -30,7 +30,11 @@ class MovieDetailVC: UITableViewController {
     @IBOutlet weak var addToFavouritesButton: UIButton!
     
     @IBAction func addToFavouritesButtonPressed(_ sender: Any) {
-        favouritesDataSource.saveFavourite()
+        if favouritesDataSource.isAlreadyFavourite(){
+            favouritesDataSource.deleteFromFavourites()
+        }else{
+            favouritesDataSource.savetoFavourites()
+        }
         toggleFavouritesButton()
     }
     
@@ -93,15 +97,13 @@ class MovieDetailVC: UITableViewController {
     }
     
     func toggleFavouritesButton(){
-        if let currentMovie = favouritesDataSource.getCurrentFavourite(){
-            if favouritesDataSource.isAlreadyFavourite(favourite: currentMovie){
+        if favouritesDataSource.isAlreadyFavourite(){
                 addToFavouritesButton.setTitle("Remove from favourites", for: .normal)
                 addToFavouritesButton.setTitleColor(.red, for: .normal)
             }else{
                 addToFavouritesButton.setTitle("Add to favourites", for: .normal)
                 addToFavouritesButton.setTitleColor(.blue, for: .normal)
             }
-        }
     }
     
     

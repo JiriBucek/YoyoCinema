@@ -26,8 +26,6 @@ class SearchVC: UIViewController {
         searchTableView.delegate = self
         searchTableView.dataSource = self
         searchBar.delegate = self
-        
-        print(FavouritesDataSource.shared.loadFavourites())
     }
 }
 

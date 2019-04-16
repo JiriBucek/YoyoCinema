@@ -12,10 +12,8 @@ class FavouritesVC: UITableViewController {
     
     let favouritesDataSource = FavouritesDataSource.shared
 
-    var favouritesArray: [Favourite]?
     
     override func viewDidLoad() {
-        favouritesArray = favouritesDataSource.loadFavourites()
         super.viewDidLoad()
     }
     
@@ -23,7 +21,7 @@ class FavouritesVC: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "FavouritesCell", for: indexPath) as! FavouritesCell
-        if let favourite = favouritesArray?[indexPath.row]{
+        if let favourite = favouritesDataSource.favouriteForIndexPath(indexPath){
             cell.titleLabel.text = favourite.title
             cell.posterImageView.getPosterImage(with: favourite.imageUrl!)
         }
@@ -35,8 +33,8 @@ class FavouritesVC: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if let favouritesArray = favouritesArray{
-            return favouritesArray.count
+        if let favouritesNumber = favouritesDataSource.numberOfFavourites(){
+            return favouritesNumber
         }else{
             return 0
         }
