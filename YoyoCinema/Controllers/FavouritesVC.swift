@@ -11,7 +11,6 @@ import UIKit
 class FavouritesVC: UITableViewController {
     
     let favouritesDataSource = FavouritesDataSource.shared
-
     
     override func viewDidLoad() {
         tableView.tableFooterView = UIView()
@@ -20,13 +19,16 @@ class FavouritesVC: UITableViewController {
 
     override func viewDidAppear(_ animated: Bool) {
        tableView.reloadData()
+        // For case of deleting a movie from favourites.
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "FavouritesCell", for: indexPath) as! FavouritesCell
         if let favourite = favouritesDataSource.favouriteForIndexPath(indexPath){
             cell.titleLabel.text = favourite.title
-            cell.posterImageView.getPosterImage(with: favourite.imageUrl!)
+            if let imageUrl = favourite.imageUrl{
+                cell.posterImageView.getPosterImage(with: imageUrl)
+            }
         }
         return cell
     }
@@ -48,8 +50,4 @@ class FavouritesVC: UITableViewController {
             movieDetailVC.id = movieId
         }
     }
-    
-
-
-
 }

@@ -13,8 +13,6 @@ class MovieDetailVC: UITableViewController {
     
     @IBOutlet weak var movieTitleLabel: UILabel!
     
-    @IBOutlet weak var yearLabel: UILabel!
-    
     @IBOutlet weak var lengthLabel: UILabel!
     
     @IBOutlet weak var originalTitleLabel: UILabel!
@@ -45,25 +43,22 @@ class MovieDetailVC: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         tableView.tableFooterView = UIView()
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = UITableView.automaticDimension
+        
         ActivityIndicator.shared.startAnimating(view: self.view)
         loadDetails()
     }
     
-
     func loadDetails(){
         if let id = id{
             detailAPI.requestMovieDetails(for: id) { success in
                 if success{
                     let movieDetail = self.detailAPI.movieDetail
-                    var movieTitle = ""
-                    if let title = movieDetail.title{
-                        movieTitle = title
-                        if let year = movieDetail.releaseYear{
-                            movieTitle += " (\(year))"
-                        }
-                    }
-                    self.movieTitleLabel.text = movieTitle
+          
+                    self.movieTitleLabel.text = movieDetail.title
                     
                     self.movieDescriptionLabel.text = movieDetail.description
                     
@@ -92,7 +87,6 @@ class MovieDetailVC: UITableViewController {
                     self.toggleFavouritesButton()
                     self.tableView.reloadData()
                     ActivityIndicator.shared.stopAnimating()
-                    
                 }else{
                     self.displayAlert(userMessage: "Could not load data. Please try again later.")
                 }
@@ -112,26 +106,12 @@ class MovieDetailVC: UITableViewController {
     
     func setRankColor(for rank: Double) -> UIColor{
         switch rank{
-        case 0...3:
+        case 0..<3:
             return UIColor.myColors.red
-        case 3...6:
+        case 3..<6:
             return UIColor.myColors.yellow
         default:
             return UIColor.myColors.green
         }
-        
-        
     }
-    
-    
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-            return UITableView.automaticDimension
-    }
-    
-    
-    override func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-         return UITableView.automaticDimension
-    }
-
-    
 }

@@ -9,7 +9,7 @@
 import UIKit
 import Alamofire
 
-class SearchVC: UIViewController {
+class SearchVC: UIViewController, UITableViewDelegate {
     
     @IBOutlet weak var searchBar: UISearchBar!
     
@@ -18,7 +18,6 @@ class SearchVC: UIViewController {
     @IBOutlet weak var backgroundView: UIView!
     
     var searchAPI = SearchAPI.shared
-    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,12 +31,6 @@ class SearchVC: UIViewController {
         searchBar.delegate = self
         searchBar.becomeFirstResponder()
     }
-}
-
-
-extension SearchVC: UITableViewDelegate{
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if checkInternet(){
@@ -50,32 +43,25 @@ extension SearchVC: UITableViewDelegate{
             }
         }
     }
-    
-    
 }
+
 
 extension SearchVC: UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "MoviePreviewCell", for: indexPath) as! MoviePreviewCell
         
         if let movie = searchAPI.movieForIndexPath(indexPath: indexPath){
-            var titleText = ""
-            if let title = movie.title{
-                titleText = title
-                if let year = movie.releaseYear{
-                    titleText += " (\(year))"
-                }
-            }
-            cell.titleLabel.text = titleText
-            
+        // Results returned by API
+            cell.titleLabel.text = movie.title
             cell.descriptionLabel.text = movie.description
             
             if let imageUrl = movie.imageUrl{
                 cell.movieImage.getPosterImage(with: imageUrl)
             }
-            
         }else{
+        // Zero search resuts
             let noResultCell = tableView.dequeueReusableCell(withIdentifier: "NoResultsCell") as! NoResultsCell
             return noResultCell
         }
@@ -85,6 +71,7 @@ extension SearchVC: UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let numberOfRows = searchAPI.numberOfRows()
         if numberOfRows == 0, let searchText = searchBar.text, !searchText.isEmpty{
+            // Displays NoResults table view cell
             return 1
         }else{
             return numberOfRows
@@ -107,6 +94,7 @@ extension SearchVC: UISearchBarDelegate{
                     self.searchTableView.isHidden = false
                     
                     if self.searchTableView.numberOfRows(inSection: 0) > 0 {
+                        // Scrolls back to top when user types a letter.
                         let indexPath = IndexPath(row: 0, section: 0)
                         self.searchTableView.scrollToRow(at: indexPath, at: .top, animated: false)
                     }

@@ -38,7 +38,12 @@ class DetailAPI{
                     let json = JSON(response.result.value as Any)
 
                     if let title = json["title"].string{
-                        self.movieDetail.title = title
+                        var year = ""
+                        if var date = json["release_date"].string, date.count > 4{
+                            date = String(date.prefix(4))
+                            year = " (\(date))"
+                        }
+                        self.movieDetail.title = title + year
                     }
                     
                     if let id = json["id"].int{
@@ -55,10 +60,6 @@ class DetailAPI{
                     
                     if let imageUrl = json["poster_path"].string{
                         self.movieDetail.imageUrl = posterImageBasePath + imageUrl
-                    }
-                    
-                    if let year = json["release_date"].string{
-                        self.movieDetail.releaseYear = String(year.prefix(4))
                     }
                     
                     if let lenght = json["runtime"].int{

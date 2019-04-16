@@ -9,6 +9,8 @@
 import Foundation
 
 struct Favourite: Codable, Equatable{
+    // Struc used for saving and loading list of user's favourite movies.
+    
     var title: String?
     var imageUrl: String?
     var id: Int?

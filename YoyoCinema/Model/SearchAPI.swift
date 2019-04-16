@@ -47,15 +47,16 @@ class SearchAPI: NSObject{
                             let movie = Movie()
                             
                             if let title = result["title"].string{
-                                movie.title = title
+                                var year = ""
+                                if var date = result["release_date"].string, date.count > 4{
+                                    date = String(date.prefix(4))
+                                    year = " (\(date))"
+                                }
+                                movie.title = title + year
                             }
                             
                             if let description = result["overview"].string{
                                  movie.description = description
-                            }
-                            
-                            if let year = result["release_date"].string, year.count > 4{
-                                movie.releaseYear = String(year.prefix(4))
                             }
                             
                             if let url = result["poster_path"].string{

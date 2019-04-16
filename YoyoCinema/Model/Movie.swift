@@ -13,7 +13,6 @@ class Movie{
     var originalTitle: String?
     var description: String?
     var imageUrl: String?
-    var releaseYear: String?
     var genres: [String]?
     var length: Int?
     var rank: Double?
