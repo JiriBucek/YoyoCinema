@@ -18,9 +18,8 @@ class FavouritesVC: UITableViewController {
     }
 
     override func viewDidAppear(_ animated: Bool) {
-        tableView.reloadData()
+       tableView.reloadData()
     }
-    
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "FavouritesCell", for: indexPath) as! FavouritesCell
