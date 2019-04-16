@@ -57,6 +57,7 @@ extension SearchVC: UITableViewDataSource{
             cell.titleLabel.text = movie.title
             cell.descriptionLabel.text = movie.description
             
+            cell.movieImage.image = nil
             if let imageUrl = movie.imageUrl{
                 cell.movieImage.getPosterImage(with: imageUrl)
             }
