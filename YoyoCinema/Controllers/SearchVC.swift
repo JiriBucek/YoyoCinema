@@ -25,7 +25,9 @@ class SearchVC: UIViewController {
         searchTableView.tableFooterView = UIView()
         searchTableView.delegate = self
         searchTableView.dataSource = self
+        searchTableView.keyboardDismissMode = UIScrollView.KeyboardDismissMode.onDrag
         searchBar.delegate = self
+        searchBar.becomeFirstResponder()
         
         let nib = UINib.init(nibName: "NoResultsCell", bundle: nil)
         searchTableView.register(nib, forCellReuseIdentifier: "NoResultsCell")
@@ -91,7 +93,7 @@ extension SearchVC: UITableViewDataSource{
 }
 
 
-extension SearchVC: UISearchBarDelegate, UITextFieldDelegate{
+extension SearchVC: UISearchBarDelegate{
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if checkInternet(){
@@ -114,10 +116,5 @@ extension SearchVC: UISearchBarDelegate, UITextFieldDelegate{
             }
         }
     }
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        searchBar.endEditing(true)
-    }
-    
 }
 
