@@ -9,6 +9,8 @@
 import UIKit
 
 class ActivityIndicator {
+    // Activity indicator view with a spinner.
+    
     static let shared = ActivityIndicator()
 
     var frameView = UIView()

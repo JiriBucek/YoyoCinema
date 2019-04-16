@@ -27,6 +27,7 @@ extension UIImageView{
 }
 
 extension UIViewController{
+    
     func displayAlert(userMessage: String) -> Void {
         DispatchQueue.main.async {
             let alertController = UIAlertController(title: "Error", message: userMessage, preferredStyle: .alert)

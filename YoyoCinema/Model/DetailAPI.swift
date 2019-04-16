@@ -21,7 +21,7 @@ class DetailAPI{
     }
     
     func requestMovieDetails(for movieId: Int, completionHandler: @escaping (_ success: Bool) -> Void){
-        let posterImageBasePath = "https://image.tmdb.org/t/p/w200"
+        let posterImageBasePath = "https://image.tmdb.org/t/p/w185"
         
         guard let url = URL(string: "https://api.themoviedb.org/3/movie/\(movieId)?api_key=4cb1eeab94f45affe2536f2c684a5c9e") else {
             completionHandler(false)

@@ -197,8 +197,8 @@
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="pPG-CC-fxD">
-                                                    <rect key="frame" x="139" y="16" width="252.5" height="68"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="pPG-CC-fxD">
+                                                    <rect key="frame" x="136.5" y="16" width="252.5" height="68"/>
                                                     <color key="backgroundColor" red="0.19605585932731628" green="0.19609469175338745" blue="0.1960475742816925" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -516,6 +516,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="laM-kZ-WPR"/>
+        <segue reference="fVC-N2-fEW"/>
     </inferredMetricsTieBreakers>
 </document>
