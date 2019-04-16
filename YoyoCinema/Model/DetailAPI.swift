@@ -37,6 +37,10 @@ class DetailAPI{
                         self.movieDetail?.title = title
                     }
                     
+                    if let id = json["id"].int{
+                        self.movieDetail?.id = id
+                    }
+                    
                     if let description = json["overview"].string{
                         self.movieDetail?.description = description
                     }

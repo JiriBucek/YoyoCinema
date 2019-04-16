@@ -16,7 +16,10 @@ class FavouritesVC: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     }
-    
+
+    override func viewDidAppear(_ animated: Bool) {
+        tableView.reloadData()
+    }
     
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -39,6 +42,17 @@ class FavouritesVC: UITableViewController {
             return 0
         }
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "segueFromFavourites" {
+            let movieDetailVC = segue.destination as! MovieDetailVC
+            guard let indexPath = tableView.indexPathForSelectedRow, let movieId = favouritesDataSource.favouriteForIndexPath(indexPath)?.id else {
+                return
+            }
+            movieDetailVC.id = movieId
+        }
+    }
+    
 
 
 

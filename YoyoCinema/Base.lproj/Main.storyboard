@@ -352,7 +352,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zDh-9Z-zRJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1918.840579710145" y="100.44642857142857"/>
+            <point key="canvasLocation" x="1919" y="117"/>
         </scene>
         <!--Favourites-->
         <scene sceneID="RBa-05-TS5">
@@ -397,6 +397,7 @@
                                 <connections>
                                     <outlet property="posterImageView" destination="z6L-en-8sL" id="kpA-lA-uZh"/>
                                     <outlet property="titleLabel" destination="gHD-1T-orD" id="cNx-Nx-dCM"/>
+                                    <segue destination="Uoq-UO-2cz" kind="show" identifier="segueFromFavourites" id="laM-kZ-WPR"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -408,7 +409,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="A0K-xY-63c" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1918.840579710145" y="845.75892857142856"/>
+            <point key="canvasLocation" x="1042" y="925"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="e01-48-3yd">
@@ -429,4 +430,7 @@
             <point key="canvasLocation" x="33" y="117"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="laM-kZ-WPR"/>
+    </inferredMetricsTieBreakers>
 </document>
